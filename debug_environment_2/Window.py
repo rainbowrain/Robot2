@@ -65,11 +65,8 @@ class Window:
     def openGraph(self, name):
         self.figures[name] = plt.figure()
         self.axes[name] = self.figures[name].add_subplot(1,1,1) # two rows, one column, first plot
-        self.lines[name] = self.axes[name].plot(self.data[name]['time'], self.data[name]['value'], "r-", animated=True)[0]
-        animation.FuncAnimation(self.figures[name] , self.animate, None, 
-                                      interval=0, blit=True)
+        self.lines[name] = self.axes[name].plot(self.data[name]['time'], self.data[name]['value'], "r-",)
         plt.show()
-        print("Graph opened")
         return 
     
     def update(self):

@@ -9,7 +9,6 @@ serial = MyDataSource()
 descriptors = ['test'] # the descriptors to be monitored for
 global_data = {} # global data tracker used by all other components
 
-
 view = Window(global_data) # give the view a reference to the data
 
 dataBuffer = ""
@@ -65,8 +64,6 @@ for descriptor in descriptors:
     view.addSensorDisplay(descriptor, 0)
     
 view.schedule(loop, 100)
-
-#plt.show()
 
 view.begin()
 
