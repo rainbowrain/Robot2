@@ -6,7 +6,7 @@ from MyDataSource import MyDataSource
 port = "COM16"
 #serial = Serial(port, 9600, timeout=1)
 serial = MyDataSource()
-descriptors = ['test'] # the descriptors to be monitored for
+descriptors = ['distance'] # the descriptors to be monitored for
 global_data = {} # global data tracker used by all other components
 
 view = Window(global_data) # give the view a reference to the data
@@ -17,12 +17,12 @@ def readMsg(ds): # reads ONE sentence and stores the rest in a buffer
     dataBuffer += ds.read(ds.available()) # ds must implement ds.read()->string and ds.available()->int
     deliminatorIndex = dataBuffer.find('\n')
     if(deliminatorIndex < 0):
-        print("EOF not found")
+        #print("EOF not found")
         return []
     sentence = dataBuffer[0:dataBuffer.index('\n')]
     dataBuffer = dataBuffer[dataBuffer.index('\n')+1 : len(dataBuffer)] # incompleted sentences
     if(sentence[0] != "$"):
-        print("In-complete message. Did not find '$'")
+        #print("In-complete message. Did not find '$'")
         return []
     parts = sentence.split(',')
     parts[0] = parts[0][1:len(parts[0])]
@@ -39,7 +39,7 @@ def readData():
     global global_data
     message = readMsg(serial)
     if(len(message)==0):
-        print("Message was empty")
+        #print("Message was empty")
         return
     descriptor = message[0]
     time = message[1]
@@ -63,7 +63,7 @@ for descriptor in descriptors:
                             }
     view.addSensorDisplay(descriptor, 0)
     
-view.schedule(loop, 100)
+view.schedule(loop, 1)
 
 view.begin()
 

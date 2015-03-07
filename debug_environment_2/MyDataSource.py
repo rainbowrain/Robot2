@@ -1,18 +1,17 @@
+from serial import *
+
 class MyDataSource:
     
     def __init__(self):
-        self.x = 0
-        self.y = 0
+
+        self.ser = Serial("COM16", 9600, timeout=0) # Where should these configurations such as COM port go?
     
     def read(self, n=1):
-        self.x += 1
-        self.y += 1
-        if self.y > 20:
-            self.y = -20
-        return "$test," + str(self.x) + "," + str(self.y) + "\n"
+        str = self.ser.readline()
+        return str
         
     def available(self):
-        return 1
+        self.ser.inWaiting()
     
     def close(self):
         return

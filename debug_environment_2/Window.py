@@ -74,7 +74,7 @@ class Window:
         
     def updateTableRows(self):
         for descriptor in self.sensorRows.keys():
-            if len(self.data[descriptor])==0:
+            if len(self.data[descriptor]['value'])==0:
                 self.sensorRows[descriptor].setValue(-1)
             else:
                 self.sensorRows[descriptor].setValue(self.data[descriptor]['value'][-1])
